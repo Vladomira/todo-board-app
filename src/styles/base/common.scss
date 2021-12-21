@@ -1,0 +1,23 @@
+.list {
+  list-style: none;
+}
+
+p {
+  margin: 0;
+}
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  font-family: var(--main-font);
+  font-weight: 400;
+  //   background: rgb(1, 150, 150);
+}
