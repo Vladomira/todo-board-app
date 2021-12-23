@@ -1,7 +1,8 @@
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 
 // import TodosList from '../components/TodoList/TodosList'
+import CardSet from '../components/Board/CardSet'
 import toAbbreviate from '../functionsService/abbreviation'
 import Container from '../components/Container/Container'
 import coloriseName from '../functionsService/colorFunction'
@@ -11,21 +12,17 @@ export default function TodosView() {
   const dispatch = useDispatch()
   const todos = useSelector(selectors.getTodos)
   const users = useSelector(selectors.getUsers)
-  const toggleCompleted = useSelector(selectors.toggleCompleted)
   const isLoadingTodos = useSelector(selectors.isLoading)
-  // console.log(condition, 'condition')
+  // const inProgress = useSelector(selectors.inProgress)
+  // console.log(inProgress, 'inProgress')
 
+  const onToggleCompleted = ({ id, condition }) => {
+    dispatch(operations.toggleCompleted({ id, condition }))
+  }
   useEffect(() => {
     dispatch(operations.fetchTodos())
     dispatch(operations.fetchUsers())
   }, [dispatch])
-
-  // useEffect(() => {
-  //   dispatch(operations.fetchUsers())
-  // }, [dispatch])
-  // useEffect(() => {
-  //   dispatch(operations.todoCompleted())
-  // })
 
   return (
     <>
@@ -34,7 +31,8 @@ export default function TodosView() {
           <Container>
             <p className="section__title">Ticket list</p>
             <ul className="tickets__list list">
-              {todos.map(({ id, userId, title, completed }) => {
+              {todos.map((todo) => {
+                const { id, userId, title, condition } = todo
                 return (
                   <li key={id} className="tickets__item">
                     <div className="tickets__box">
@@ -53,17 +51,14 @@ export default function TodosView() {
                       </p>
                       <p className="tickets__title">{title}</p>
                     </div>
-                    <button
-                      type="button"
+                    <p
                       className="tickets__completed"
-                      onClick={() => dispatch(operations.toggleCompleted(id))}
+                      onClick={() => {
+                        return onToggleCompleted({ id, condition })
+                      }}
                     >
-                      {/* {toggleCompleted(id)} */}
-                      {(completed = 'to do')}
-                    </button>
-                    {/* <button type="button" className="tickets__completed"> */}
-                    {/* {(completed = 'to do')}
-                    </button> */}
+                      {condition}
+                    </p>
                   </li>
                 )
               })}
@@ -71,7 +66,8 @@ export default function TodosView() {
           </Container>
         )}
       </section>
-      <section className="section">
+      <CardSet />
+      {/* <section className="section">
         <Container>
           <p className="section__title">Board</p>
           <ul className="board__list list">
@@ -109,20 +105,9 @@ export default function TodosView() {
             </li>
           </ul>
         </Container>
-      </section>
+      </section> */}
       {isLoadingTodos && <h1>Загружаем...</h1>}
       {/* <TodosList /> */}
     </>
   )
 }
-
-// const mapStateToProps = (state) => ({
-//   // todos: state.data.todos,
-//   isLoadingTodos: state.data.loading,
-// })
-
-// const mapDispatchToProps = (dispatch) => ({
-//   fetchTodos: () => dispatch(operations.fetchTodos()),
-// })
-
-// export default connect(mapStateToProps, mapDispatchToProps)(TodosView)
