@@ -5,11 +5,11 @@ const labelColors = [
   { color: '#00D1FF', id: 4 },
   { color: '#F8D210', id: 5 },
   { color: '#DB1F48', id: 6 },
-  // #01949A
+
   { color: '#FF9636', id: 7 },
   { color: '#81B622', id: 8 },
-  { color: '#ECF87F', id: 9 },
-  { color: '#FCB5AC', id: 10 },
+  { color: '#985eb9', id: 9 },
+  { color: '#e3175b', id: 10 },
 ]
 function coloriseName(id) {
   const nameColor = labelColors.map((el) => {

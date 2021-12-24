@@ -1,8 +1,11 @@
 .board {
+  &__title {
+    margin-bottom: 80px;
+  }
   &__list {
     display: flex;
-    justify-content: center;
-    padding-top: 40px;
+    margin-left: -40px;
+    margin-top: -40px;
     padding-bottom: 40px;
     border-radius: 15px;
     border: 1px solid #333333;
@@ -11,11 +14,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-
-    padding-left: 36px;
+    justify-content: start;
+    margin-left: 40px;
+    margin-top: 40px;
+    flex-basis: calc(100% / 3 - 40px);
     padding-right: 36px;
-    border-right: 1px solid #333333;
+
+    &:not(:last-child) {
+      border-right: 1px solid #333333;
+    }
   }
   &__item-title {
     margin-bottom: 20px;
@@ -23,5 +30,10 @@
     line-height: 1.17;
 
     color: #000000;
+  }
+}
+.cards-set {
+  &__item {
+    display: flex;
   }
 }
